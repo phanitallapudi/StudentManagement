@@ -57,7 +57,7 @@ namespace StudentManagement.Controllers
 
             if (change > 0)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Welcome");
             }
             else
             {
@@ -104,6 +104,8 @@ namespace StudentManagement.Controllers
 
             if (row != null)
             {
+                Session["Name"] = row.Name;
+                
                 return RedirectToAction("Welcome");
             }
             else
