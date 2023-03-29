@@ -104,7 +104,14 @@ namespace StudentManagement.Controllers
 
             if (row != null)
             {
+                if (row.Email == "admin" && row.Password== "admin") 
+                {
+                    return RedirectToAction("AdminView");
+                }
+
+
                 Session["Name"] = row.Name;
+                Session["Password"] = row.Password;
                 
                 return RedirectToAction("Welcome");
             }
@@ -115,6 +122,11 @@ namespace StudentManagement.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult AdminView()
+        {
+            return View(context.Std_Table.ToList());
         }
 
         public ActionResult Welcome()
