@@ -32,7 +32,8 @@ namespace StudentManagement.Controllers
 
             if (count > 0)
             {
-                return RedirectToAction("Index");
+                ViewBag.SubmitMsg = ("<script>alert('Account created successfully, please log in.')</script>");
+                return RedirectToAction("Login");
             }
             else
             {
@@ -81,7 +82,8 @@ namespace StudentManagement.Controllers
             if (change > 0)
             {
                 ModelState.Clear();
-                return RedirectToAction("Index");
+                Session.Abandon();
+                return RedirectToAction("Login");
             }
             else
             {
