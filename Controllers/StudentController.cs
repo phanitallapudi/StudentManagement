@@ -106,14 +106,12 @@ namespace StudentManagement.Controllers
 
             if (row != null)
             {
+                Session["Name"] = row.Name;
+                Session["Password"] = row.Password;
                 if (row.Email == "admin" && row.Password== "admin") 
                 {
                     return RedirectToAction("AdminView");
                 }
-
-
-                Session["Name"] = row.Name;
-                Session["Password"] = row.Password;
                 
                 return RedirectToAction("Welcome");
             }
