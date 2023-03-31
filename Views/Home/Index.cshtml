@@ -2,15 +2,20 @@
     ViewBag.Title = "Home Page";
 }
 
-<link rel="stylesheet"  href="~/CSS/StyleSheet1.css" type="text/css"/>
-<div class="jumbotron">
-    <h1 class="text-center">Student Sports Management</h1>
-    <p class="lead">ASP.NET powered web application for Student Sports Management.</p>
-    <div class="text-center">
-        <p><a href="https://localhost:44363/Student/Login" class="btn btn-primary btn-lg">Login &raquo;</a></p>
+<link rel="stylesheet" href="~/CSS/StyleSheet1.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/CSS/LayoutStyleSheet.css" />
+<div class="content-wrapper" style="height: 100vh; display: flex; justify-content: center; align-items: center ">
+    <div class="jumbotron d-flex justify-content-center align-items-center mt-5" style="height : 60vh;">
+        <h1 class="text-center" style="color: black !important;">Student Sports Management</h1>
+        <p class="lead text-center">ASP.NET powered web application for Student Sports Management.</p>
+        <div class="text-center">
+            <p><a href="https://localhost:44363/Student/Login" class="btn btn-primary btn-lg">Login &raquo;</a></p>
+        </div>
+        <p class="text-center">
+            <a href="https://localhost:44363/Student/Create">Sign up</a>
+        </p>
     </div>
-    <p class="text-center">
-        <a href="https://localhost:44363/Student/Create">Sign up</a>
-    </p>
+
 </div>
+
 
