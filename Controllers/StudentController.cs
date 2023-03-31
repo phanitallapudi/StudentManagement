@@ -29,6 +29,19 @@ namespace StudentManagement.Controllers
         {
             context.Std_Table.Add(stud);
             int count = context.SaveChanges();
+            
+
+            //StudentInfo std_info = new StudentInfo
+            //{
+            //    Id = stud.Id,
+            //    Name = stud.Name,
+            //    Age = 0,
+            //    Achievements = 0,
+            //    Sport = ""
+            //};
+            //context.Std_TableInfo.Add(std_info);
+            //context.SaveChanges();
+
 
             if (count > 0)
             {
@@ -77,13 +90,15 @@ namespace StudentManagement.Controllers
         public ActionResult Delete(Student stud)
         {
             context.Entry(stud).State = EntityState.Deleted;
+            var removeData = context.Std_TableInfo.Where(m => m.Id== stud.Id).FirstOrDefault();
+            context.Std_TableInfo.Remove(removeData);
             int change = context.SaveChanges();
 
             if (change > 0)
             {
                 ModelState.Clear();
                 Session.Abandon();
-                return RedirectToAction("Login");
+                return RedirectToAction("Create");
             }
             else
             {
@@ -136,6 +151,41 @@ namespace StudentManagement.Controllers
             return View(context.Std_Table.ToList());
         }
 
+        public ActionResult InfoEdit(int id)
+        {
+            var ref_row = context.Std_Table.Where(m => m.Id == id).FirstOrDefault();
+            int foreignId = ref_row.Id;
+
+            var changes = context.Std_TableInfo.Where(model => model.Id == id).FirstOrDefault();
+
+            if (changes == null)
+            {
+                changes = new StudentInfo();
+                changes.Id = id;
+                changes.Name = ref_row.Name;
+                context.Std_TableInfo.Add(changes);
+                context.SaveChanges();
+            }
+
+            return View(changes);
+        }
+
+        [HttpPost]
+        public ActionResult InfoEdit(StudentInfo stud)
+        {
+            context.Entry(stud).State = EntityState.Modified;
+            int change = context.SaveChanges();
+
+            if (change > 0)
+            {
+                return RedirectToAction("Welcome");
+            }
+            else
+            {
+                ViewBag.EditMdsg = ("<script>alert('Error occured')</script>");
+            }
+            return View();
+        }
 
     }
 }

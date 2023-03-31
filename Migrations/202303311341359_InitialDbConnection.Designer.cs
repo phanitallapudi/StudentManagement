@@ -7,13 +7,13 @@ namespace StudentManagement.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class InitialDbConnection : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialDbConnection));
         
         string IMigrationMetadata.Id
         {
-            get { return "202303290508437_Initial Migration"; }
+            get { return "202303311341359_InitialDbConnection"; }
         }
         
         string IMigrationMetadata.Source

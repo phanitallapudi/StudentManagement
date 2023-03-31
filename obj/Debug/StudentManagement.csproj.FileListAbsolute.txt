@@ -81,6 +81,5 @@ D:\C#_PractiseFiles\StudentManagement\bin\EntityFramework.dll
 D:\C#_PractiseFiles\StudentManagement\bin\EntityFramework.SqlServer.dll
 D:\C#_PractiseFiles\StudentManagement\bin\EntityFramework.xml
 D:\C#_PractiseFiles\StudentManagement\bin\EntityFramework.SqlServer.xml
-D:\C#_PractiseFiles\StudentManagement\obj\Debug\StudentManagement.Migrations.InitialMigration.resources
+D:\C#_PractiseFiles\StudentManagement\obj\Debug\StudentManagement.Migrations.InitialDbConnection.resources
 D:\C#_PractiseFiles\StudentManagement\obj\Debug\StudentManagement.csproj.GenerateResource.cache
-D:\C#_PractiseFiles\StudentManagement\obj\Debug\StudentManagement.Migrations.StudentInfoTable.resources

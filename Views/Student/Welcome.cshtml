@@ -39,7 +39,22 @@
             </tr>
         }
     }
-    
+
+    @foreach (var item in Model)
+    {
+
+        if (item.Name == Session["Name"] as string)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit Details", "InfoEdit", new { id = item.Id }) 
+                </td>
+            </tr>
+        }
+    }
+
+
+
 
 
 

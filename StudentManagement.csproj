@@ -133,13 +133,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303290508437_Initial Migration.cs" />
-    <Compile Include="Migrations\202303290508437_Initial Migration.designer.cs">
-      <DependentUpon>202303290508437_Initial Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303310435397_StudentInfoTable.cs" />
-    <Compile Include="Migrations\202303310435397_StudentInfoTable.designer.cs">
-      <DependentUpon>202303310435397_StudentInfoTable.cs</DependentUpon>
+    <Compile Include="Migrations\202303311341359_InitialDbConnection.cs" />
+    <Compile Include="Migrations\202303311341359_InitialDbConnection.designer.cs">
+      <DependentUpon>202303311341359_InitialDbConnection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbServicesContext.cs" />
@@ -190,6 +186,7 @@
     <Content Include="Views\Student\Welcome.cshtml" />
     <Content Include="Views\Student\Login.cshtml" />
     <Content Include="Views\Student\AdminView.cshtml" />
+    <Content Include="Views\Student\InfoEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -209,11 +206,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202303290508437_Initial Migration.resx">
-      <DependentUpon>202303290508437_Initial Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303310435397_StudentInfoTable.resx">
-      <DependentUpon>202303310435397_StudentInfoTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303311341359_InitialDbConnection.resx">
+      <DependentUpon>202303311341359_InitialDbConnection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
