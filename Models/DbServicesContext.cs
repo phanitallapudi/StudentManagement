@@ -9,5 +9,7 @@ namespace StudentManagement.Models
     public class DbServicesContext : DbContext
     {
         public DbSet<Student> Std_Table { get; set; }
+        public DbSet<StudentInfo> Std_TableInfo { get; set; }
+
     }
 }
