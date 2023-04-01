@@ -1,6 +1,6 @@
 # StudentManagement
 
-To use this project locally, changes the initial catalog in Web.config from "PROTON\SQLEXPRESS" to you "<your system hostname>\SQLEXPRESS",
+To use this project locally, changes the initial catalog in Web.config from "PROTON\SQLEXPRESS" to you "hostname\SQLEXPRESS",
 later followed by creating migration and updating database
 
 commands:
