@@ -16,7 +16,8 @@ namespace StudentManagement.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            return View(context.Std_Table.ToList());
+            //return View(context.Std_Table.ToList());
+            return RedirectToAction("Login");
         }
 
         public ActionResult Create()
@@ -59,13 +60,21 @@ namespace StudentManagement.Controllers
 
         public ActionResult Edit(int id)
         {
-            var elem = context.Std_Table.Where(model => model.Id == id).FirstOrDefault();
-
+            var elem = context.Std_Table.SingleOrDefault(model => model.Id == id);
+            if (elem == null)
+            {
+                return HttpNotFound();
+            }
             return View(elem);
         }
+
         [HttpPost]
         public ActionResult Edit(Student stud)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(stud);
+            }
             context.Entry(stud).State = EntityState.Modified;
             int change = context.SaveChanges();
 
@@ -76,9 +85,10 @@ namespace StudentManagement.Controllers
             else
             {
                 ViewBag.EditMdsg = ("<script>alert('Error occured')</script>");
+                return View(stud);
             }
-            return View();
         }
+
 
         public ActionResult Delete(int id)
         {
