@@ -189,19 +189,33 @@ namespace StudentManagement.Controllers
         [HttpPost]
         public ActionResult InfoEdit(StudentInfo stud)
         {
-            context.Entry(stud).State = EntityState.Modified;
-            int change = context.SaveChanges();
+            var existingStudentInfo = context.Std_TableInfo.FirstOrDefault(si => si.Name == stud.Name);
 
-            if (change > 0)
+            if (existingStudentInfo != null)
             {
+                // Update the existing StudentInfo entity with the values from the submitted form data
+                existingStudentInfo.Name = stud.Name;
+                existingStudentInfo.Age = stud.Age;
+                existingStudentInfo.Sport = stud.Sport;
+                existingStudentInfo.Achievements = stud.Achievements;
+
+                // Save changes to the database
+                context.SaveChanges();
+
                 return RedirectToAction("Welcome");
             }
             else
             {
                 ViewBag.EditMdsg = ("<script>alert('Error occured')</script>");
+                return View();
             }
-            return View();
         }
+
+        public ActionResult GeneralView()
+        {
+            return View(context.Std_TableInfo.ToList());
+        }
+
 
     }
 }
