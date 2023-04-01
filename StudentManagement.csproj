@@ -141,6 +141,7 @@
     <Compile Include="Models\DbServicesContext.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentInfo.cs" />
+    <Compile Include="Models\TableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

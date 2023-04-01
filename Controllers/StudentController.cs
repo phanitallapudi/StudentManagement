@@ -148,7 +148,13 @@ namespace StudentManagement.Controllers
         {
             //var row = context.Std_Table.Where
 
-            return View(context.Std_Table.ToList());
+            var ViewModel = new TableViewModel
+            {
+                Student_List_Ref = context.Std_Table.ToList(),
+                Student_Info_Ref = context.Std_TableInfo.ToList()
+            };
+
+            return View(ViewModel);
         }
 
         public ActionResult InfoEdit(int id)

@@ -1,61 +1,101 @@
-﻿@model IEnumerable<StudentManagement.Models.Student>
+﻿@model StudentManagement.Models.TableViewModel
 
+
+@{
+    var student = Model.Student_List_Ref.FirstOrDefault(s => s.Name == Session["Name"] as string);
+}
+
+<p>
+    <h3>
+        Account Details
+    </h3>
+</p>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => student.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => student.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
+            @Html.DisplayNameFor(model => student.Password)
         </th>
         <th></th>
     </tr>
 
-
-
-    @foreach (var item in Model)
+    @if (student != null)
     {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student.Password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = student.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = student.Id })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Edit Details", "InfoEdit", new { id = student.Id })
+            </td>
+        </tr>
+    }
 
-        if (item.Name == Session["Name"] as string)
+</table>
+
+<p>
+    <h3>
+        Personal Information
+    </h3>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Info_Ref.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Info_Ref.FirstOrDefault().Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Info_Ref.FirstOrDefault().Sport)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Info_Ref.FirstOrDefault().Achievements)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Student_Info_Ref)
+    {
+        if (item.Name == student.Name)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.Age)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Password)
+                    @Html.DisplayFor(modelItem => item.Sport)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.DisplayFor(modelItem => item.Achievements)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "InfoEdit", new { id = item.Id })
                 </td>
             </tr>
         }
     }
-
-    @foreach (var item in Model)
-    {
-
-        if (item.Name == Session["Name"] as string)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink("Edit Details", "InfoEdit", new { id = item.Id }) 
-                </td>
-            </tr>
-        }
-    }
-
-
-
-
-
 
 </table>
