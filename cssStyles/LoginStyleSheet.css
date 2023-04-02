@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height : 60vh;
+    height: 60vh;
     background: rgba(255, 255, 255, 0.11);
     border-radius: 5px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -27,28 +27,33 @@
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    
 }
 
 .form-group .control-label {
-    color : white;
-    padding : 2rem;
+    color: white;
+    padding: 2rem;
+    font-size : 1.5rem;
+    margin-right : 2rem;
 }
 
-.form-group{
+.form-group {
     display: flex;
-    align-items : center;
-    justify-content : space-between;
-    width : 350px;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
 }
 
 .form-control {
-    margin-left : 2rem;
+    margin-left: 2rem;
+}
+
+input[type='text']{
+    font-size : 18px;
+    color : black;
+    font-weight : 600;
 }
 
 
-
-body{
-    background-color : midnightblue;    
+body {
+    background-color: midnightblue;
 }
-
