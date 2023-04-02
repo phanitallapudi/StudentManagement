@@ -4,11 +4,20 @@
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6.6px);
     -webkit-backdrop-filter: blur(6.6px);
-}
-
-.button-wrapper{
+    height : 50vh;
     display : flex;
-    justify-content: center;
+    justify-content : center;
     align-items : center;
+    flex-direction : column;
 }
 
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.sign-up{
+    margin-left: 2rem;
+}
