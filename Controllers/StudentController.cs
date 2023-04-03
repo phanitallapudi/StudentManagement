@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
 using StudentManagement.Models;
 
 namespace StudentManagement.Controllers
@@ -31,23 +32,38 @@ namespace StudentManagement.Controllers
             ModelState.Clear();
             if (!UserExists(stud.Email))
             {
-                context.Std_Table.Add(stud);
-                int count = context.SaveChanges();
+                string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+                bool isValidEmail = Regex.IsMatch(stud.Email, emailPattern);
 
-                if (count > 0)
+                if (isValidEmail)
                 {
-                    ViewBag.SubmitMsg = "alert('Account created successfully, please log in.');";
-                    
+                    context.Std_Table.Add(stud);
+                    int count = context.SaveChanges();
+
+                    if (count > 0)
+                    {
+                        ViewBag.AlertMessage = "Account created successfully, please log in.";
+                    }
+                    else
+                    {
+                        ViewBag.AlertMessage = "Error occured.";
+                        ModelState.Clear();
+                        //return RedirectToAction("Create");
+                    }
                 }
                 else
                 {
-                    ViewBag.SubmitMsg = "alert('Error occured.');";
-
+                    ViewBag.LoginMsg = ("<script>alert('Please enter a valid email address')</script>");
+                    ModelState.Clear();
+                    //return RedirectToAction("Create");
                 }
+
             }
             else
             {
-                ViewBag.SubmitMsg = "alert('User already exists');";
+                ViewBag.AlertMessage = "User already exists";
+                ModelState.Clear();
+                //return RedirectToAction("Create");
             }
 
             return RedirectToAction("Login");
@@ -181,7 +197,7 @@ namespace StudentManagement.Controllers
         public ActionResult InfoEdit(int id)
         {
             var ref_row = context.Std_Table.Where(m => m.Id == id).FirstOrDefault();
-            int foreignId = ref_row.Id;
+            //int foreignId = ref_row.Id;
 
             var changes = context.Std_TableInfo.Where(model => model.Id == id).FirstOrDefault();
 
