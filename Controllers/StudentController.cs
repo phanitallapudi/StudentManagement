@@ -149,9 +149,20 @@ namespace StudentManagement.Controllers
             return View();
         }
 
-        public ActionResult AdminView()
+        public ActionResult AdminView(string searchBy, string search)
         {
-            return View(context.Std_Table.ToList());
+            if (searchBy == "Email")
+            {
+                return View(context.Std_Table.Where(x => x.Email.StartsWith(search) || search == null).ToList());
+            }
+            else if (searchBy == "Name")
+            {
+                return View(context.Std_Table.Where(x => x.Name.StartsWith(search) || search == null).ToList());
+            }
+            else
+            {
+                return View(context.Std_Table.ToList());
+            }
         }
 
         public ActionResult Welcome()
