@@ -1,5 +1,7 @@
 ﻿@model StudentManagement.Models.Student
 
+@Html.Raw(ViewBag.EditMsg)
+
 @{
     ViewBag.Title = "Delete";
 }
@@ -37,7 +39,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

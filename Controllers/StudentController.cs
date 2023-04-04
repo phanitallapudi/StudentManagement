@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
 using StudentManagement.Models;
 
 namespace StudentManagement.Controllers
@@ -12,13 +13,13 @@ namespace StudentManagement.Controllers
     {
         DbServicesContext context = new DbServicesContext();
 
+        private bool UserExists(string name)
+        {
+            return context.Std_Table.Any(u => u.Name == name);
+        }
+
 
         // GET: Student
-        public ActionResult Index()
-        {
-            //return View(context.Std_Table.ToList());
-            return RedirectToAction("Login");
-        }
 
         public ActionResult Create()
         {
@@ -28,34 +29,49 @@ namespace StudentManagement.Controllers
         [HttpPost]
         public ActionResult Create(Student stud)
         {
-            context.Std_Table.Add(stud);
-            int count = context.SaveChanges();
-            
-
-            //StudentInfo std_info = new StudentInfo
-            //{
-            //    Id = stud.Id,
-            //    Name = stud.Name,
-            //    Age = 0,
-            //    Achievements = 0,
-            //    Sport = ""
-            //};
-            //context.Std_TableInfo.Add(std_info);
-            //context.SaveChanges();
-
-
-            if (count > 0)
+            ModelState.Clear();
+            if (!UserExists(stud.Email))
             {
-                ViewBag.SubmitMsg = ("<script>alert('Account created successfully, please log in.')</script>");
-                return RedirectToAction("Login");
+                string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+                bool isValidEmail = Regex.IsMatch(stud.Email, emailPattern);
+
+                if (isValidEmail)
+                {
+                    context.Std_Table.Add(stud);
+                    int count = context.SaveChanges();
+
+                    if (count > 0)
+                    {
+                        ViewBag.AlertMessage = "Account created successfully, please log in.";
+                    }
+                    else
+                    {
+                        ViewBag.AlertMessage = "Error occured.";
+                        ModelState.Clear();
+                        //return RedirectToAction("Create");
+                    }
+                }
+                else
+                {
+                    ViewBag.LoginMsg = ("<script>alert('Please enter a valid email address')</script>");
+                    ModelState.Clear();
+                    //return RedirectToAction("Create");
+                }
+
             }
             else
             {
-                ViewBag.SubmitMsg = ("<script>alert('Error occured')</script>");
-
+                ViewBag.AlertMessage = "User already exists";
+                ModelState.Clear();
+                //return RedirectToAction("Create");
             }
 
-            return View();
+            return RedirectToAction("Login");
+        }
+        public ActionResult Index()
+        {
+            //return View(context.Std_Table.ToList());
+            return RedirectToAction("Login");
         }
 
         public ActionResult Edit(int id)
@@ -101,7 +117,7 @@ namespace StudentManagement.Controllers
         {
             context.Entry(stud).State = EntityState.Deleted;
             var removeData = context.Std_TableInfo.Where(m => m.Id== stud.Id).FirstOrDefault();
-            context.Std_TableInfo.Remove(removeData);
+            //context.Std_TableInfo.Remove(removeData);
             int change = context.SaveChanges();
 
             if (change > 0)
@@ -149,9 +165,20 @@ namespace StudentManagement.Controllers
             return View();
         }
 
-        public ActionResult AdminView()
+        public ActionResult AdminView(string searchBy, string search)
         {
-            return View(context.Std_Table.ToList());
+            if (searchBy == "Email")
+            {
+                return View(context.Std_Table.Where(x => x.Email.StartsWith(search) || search == null).ToList());
+            }
+            else if (searchBy == "Name")
+            {
+                return View(context.Std_Table.Where(x => x.Name.StartsWith(search) || search == null).ToList());
+            }
+            else
+            {
+                return View(context.Std_Table.ToList());
+            }
         }
 
         public ActionResult Welcome()
@@ -170,7 +197,7 @@ namespace StudentManagement.Controllers
         public ActionResult InfoEdit(int id)
         {
             var ref_row = context.Std_Table.Where(m => m.Id == id).FirstOrDefault();
-            int foreignId = ref_row.Id;
+            //int foreignId = ref_row.Id;
 
             var changes = context.Std_TableInfo.Where(model => model.Id == id).FirstOrDefault();
 
@@ -214,6 +241,12 @@ namespace StudentManagement.Controllers
         public ActionResult GeneralView()
         {
             return View(context.Std_TableInfo.ToList());
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("index", "Home");
         }
 
 
