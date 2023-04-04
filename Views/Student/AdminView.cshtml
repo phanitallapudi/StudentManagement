@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<StudentManagement.Models.Student>
 
+<link rel="stylesheet" href="~/cssStyles/Welcome.css" type="text/css" />
 <p>Welcome @Session["Name"]</p>
+
 
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<p>
+<p class="search-section">
     @using (Html.BeginForm("AdminView", "Student", FormMethod.Get))
     {
         <b>
@@ -33,26 +35,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-
-    if (item.Email != "admin")
+    @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+
+        if (item.Email != "admin")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     }
-}
 
 </table>
