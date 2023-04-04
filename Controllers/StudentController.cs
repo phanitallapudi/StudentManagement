@@ -243,6 +243,12 @@ namespace StudentManagement.Controllers
             return View(context.Std_TableInfo.ToList());
         }
 
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("index", "Home");
+        }
+
 
     }
 }
