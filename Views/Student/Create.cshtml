@@ -1,5 +1,15 @@
 ﻿@model StudentManagement.Models.Student
-@Html.Raw(ViewBag.LoginMsg)
+@if (TempData["Message"] != null)
+{
+    <script>alert('@TempData["Message"]')</script>
+}
+@if (TempData["MessageACS"] != null)
+{
+    <script>alert('@TempData["MessageACS"]')</script>
+}@if (TempData["MessageUAE"] != null)
+{
+    <script>alert('@TempData["MessageUAE"]')</script>
+}
 
 @{
     ViewBag.Title = "Create";

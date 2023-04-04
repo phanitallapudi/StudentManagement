@@ -15,7 +15,7 @@ namespace StudentManagement.Controllers
 
         private bool UserExists(string name)
         {
-            return context.Std_Table.Any(u => u.Name == name);
+            return context.Std_Table.Any(u => u.Email == name);
         }
 
 
@@ -42,32 +42,32 @@ namespace StudentManagement.Controllers
 
                     if (count > 0)
                     {
-                        ViewBag.AlertMessage = "Account created successfully, please log in.";
+                        TempData["MessageACS"] = "Account created successfully, please log in.";
                     }
                     else
                     {
-                        ViewBag.AlertMessage = "Error occured.";
+                        TempData["Message"] = "Error occurred.";
                         ModelState.Clear();
-                        //return RedirectToAction("Create");
+                        return RedirectToAction("Create");
                     }
                 }
                 else
                 {
-                    ViewBag.LoginMsg = ("<script>alert('Please enter a valid email address')</script>");
+                    TempData["Message"] = "Please enter a valid email address.";
                     ModelState.Clear();
-                    //return RedirectToAction("Create");
+                    return RedirectToAction("Create");
                 }
-
             }
             else
             {
-                ViewBag.AlertMessage = "User already exists";
+                TempData["MessageUAE"] = "User already exists.";
                 ModelState.Clear();
-                //return RedirectToAction("Create");
+                return RedirectToAction("Create");
             }
 
             return RedirectToAction("Login");
         }
+
         public ActionResult Index()
         {
             //return View(context.Std_Table.ToList());
@@ -159,7 +159,7 @@ namespace StudentManagement.Controllers
             else
             {
                 ViewBag.LoginMsg = ("<script>alert('Incorrect credentials')</script>");
-                ModelState.Clear();
+                //ModelState.Clear();
             }
 
             return View();
