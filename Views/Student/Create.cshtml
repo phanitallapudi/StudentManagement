@@ -41,13 +41,29 @@
                     </div>
                 </div>
 
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="password-toggle">
+                                    <i class="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group" style="margin-left: 2.5rem;">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Create" class="btn btn-danger" />
@@ -61,5 +77,23 @@
 
 
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#password-toggle").click(function () {
+                var passwordField = $("#Password");
+                var passwordToggle = $("#password-toggle i");
+
+                if (passwordField.attr("type") === "password") {
+                    passwordField.attr("type", "text");
+                    passwordToggle.removeClass("fa-eye");
+                    passwordToggle.addClass("fa-eye-slash");
+                } else {
+                    passwordField.attr("type", "password");
+                    passwordToggle.removeClass("fa-eye-slash");
+                    passwordToggle.addClass("fa-eye");
+                }
+            });
+        });
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
 }

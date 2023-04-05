@@ -1,13 +1,13 @@
 ﻿@model StudentManagement.Models.Student
 
 @Html.Raw(ViewBag.LoginMsg)
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <link rel="stylesheet" href="~/cssStyles/LoginStyleSheet.css" type="text/css" />
     <div class="form-horizontal-wrapper">
-    <h2 class="text-center" style="color : white;">Login Form</h2>
+        <h2 class="text-center" style="color : white;">Login Form</h2>
         <div class="form-horizontal">
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -20,9 +20,16 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type="password" } })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="password-toggle">
+                                <i class="fa fa-eye-slash"></i>
+                            </span>
+                        </div>
+                    </div>
                     <span>
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-default" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-default" })
                     </span>
                 </div>
             </div>
@@ -40,4 +47,20 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $("#password-toggle").click(function () {
+                var passwordInput = $("#Password");
+                var toggleIcon = $("#password-toggle i");
+                if (passwordInput.attr("type") === "password") {
+                    passwordInput.attr("type", "text");
+                    toggleIcon.removeClass("fa-eye-slash").addClass("fa-eye");
+                } else {
+                    passwordInput.attr("type", "password");
+                    toggleIcon.removeClass("fa-eye").addClass("fa-eye-slash");
+                }
+            });
+        });
+    </script>
 }
