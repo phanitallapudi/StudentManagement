@@ -88,7 +88,7 @@
 
     @foreach (var item in Model.Student_Info_Ref)
     {
-        if (item.Name == student.Name)
+        if (item.Name == student.Name || item.Name == null)
         {
             <tr>
                 <td>
