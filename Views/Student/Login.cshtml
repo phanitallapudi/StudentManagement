@@ -21,11 +21,11 @@
                 @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="input-group">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="password-toggle">
+                        <div class="input-group-append" style="display: flex; justify-content: center; align-items: flex-end; background-color:white; margin-left: 2.5rem;">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", style = "border : 0px;" } })
+                            <p class="input-group-text" id="password-toggle">
                                 <i class="fa fa-eye-slash"></i>
-                            </span>
+                            </p>
                         </div>
                     </div>
                     <span>
