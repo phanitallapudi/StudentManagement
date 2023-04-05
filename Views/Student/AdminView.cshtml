@@ -51,8 +51,8 @@
                     @Html.DisplayFor(modelItem => item.Password)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "AdminEdit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "AdminDelete", new { id = item.Id })
                 </td>
             </tr>
         }

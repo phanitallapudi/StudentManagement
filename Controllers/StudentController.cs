@@ -249,6 +249,64 @@ namespace StudentManagement.Controllers
             return RedirectToAction("index", "Home");
         }
 
+        public ActionResult AdminEdit(int id)
+        {
+            var elem = context.Std_Table.SingleOrDefault(model => model.Id == id);
+            if (elem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(elem);
+        }
+
+        [HttpPost]
+        public ActionResult AdminEdit(Student stud)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(stud);
+            }
+            context.Entry(stud).State = EntityState.Modified;
+            int change = context.SaveChanges();
+
+            if (change > 0)
+            {
+                return RedirectToAction("AdminView");
+            }
+            else
+            {
+                ViewBag.EditMdsg = ("<script>alert('Error occured')</script>");
+                return View(stud);
+            }
+        }
+
+
+        public ActionResult AdminDelete(int id)
+        {
+            var changes = context.Std_Table.Where(model => model.Id == id).FirstOrDefault();
+            return View(changes);
+        }
+
+        [HttpPost]
+        public ActionResult AdminDelete(Student stud)
+        {
+            context.Entry(stud).State = EntityState.Deleted;
+            var removeData = context.Std_TableInfo.Where(m => m.Id == stud.Id).FirstOrDefault();
+            //context.Std_TableInfo.Remove(removeData);
+            int change = context.SaveChanges();
+
+            if (change > 0)
+            {
+                ModelState.Clear();
+                Session.Abandon();
+                return RedirectToAction("AdminView");
+            }
+            else
+            {
+                ViewBag.EditMdsg = ("<script>alert('Error occured')</script>");
+            }
+            return View();
+        }
 
     }
 }
