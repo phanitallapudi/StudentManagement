@@ -104,7 +104,8 @@
                     @Html.DisplayFor(modelItem => item.Achievements)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "InfoEdit", new { id = item.Id })
+                    @Html.ActionLink("Edit", "InfoEdit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "InfoDelete", new { id = item.Id })
                 </td>
             </tr>
         }

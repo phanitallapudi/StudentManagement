@@ -238,6 +238,33 @@ namespace StudentManagement.Controllers
             }
         }
 
+        public ActionResult InfoDelete(int id)
+        {
+            var changes = context.Std_TableInfo.Where(model => model.Id == id).FirstOrDefault();
+            return View(changes);
+        }
+
+        [HttpPost]
+        public ActionResult InfoDelete(StudentInfo stud)
+        {
+            context.Entry(stud).State = EntityState.Deleted;
+            var removeData = context.Std_TableInfo.Where(m => m.Id == stud.Id).FirstOrDefault();
+            //context.Std_TableInfo.Remove(removeData);
+            int change = context.SaveChanges();
+
+            if (change > 0)
+            {
+                ModelState.Clear();
+                Session.Abandon();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.EditMdsg = ("<script>alert('Error occured')</script>");
+            }
+            return View();
+        }
+
         public ActionResult GeneralView()
         {
             return View(context.Std_TableInfo.ToList());

@@ -204,6 +204,7 @@
     <Content Include="Views\Student\GeneralView.cshtml" />
     <Content Include="Views\Student\AdminEdit.cshtml" />
     <Content Include="Views\Student\AdminDelete.cshtml" />
+    <Content Include="Views\Student\InfoDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
