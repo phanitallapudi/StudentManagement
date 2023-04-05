@@ -5,7 +5,18 @@
     var student = Model.Student_List_Ref.FirstOrDefault(s => s.Name == Session["Name"] as string);
 }
 
-<p>
+@{ 
+    var AccountName = Session["Name"];
+
+}
+<link rel="stylesheet" href="~/cssStyles/WelcomeStyleSheet.css" type="text/css" />
+<h2>
+    Welcome, @AccountName
+</h2>
+
+<div class="Details-wrapper">
+
+<p style="margin-top : 2rem;">
     <h3>
         Account Details
     </h3>
@@ -50,6 +61,7 @@
     }
 
 </table>
+</div>
 
 <p>
     <h3>
