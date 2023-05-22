@@ -5,7 +5,7 @@ later followed by creating migration and updating database
 
 commands:
 
-In NuGet Package Manager:
+In NuGet Package Manager console:
   1.) Add-Migration <name>
   2.) Update-Database
  
